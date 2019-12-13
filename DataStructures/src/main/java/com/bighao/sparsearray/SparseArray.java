@@ -19,7 +19,7 @@ package com.bighao.sparsearray;
  * 3.转换:
  * 二维数组 转 稀疏数组的思路
  *  1. 遍历  原始的二维数组，得到有效数据的个数 sum
- *  2. 根据sum 就可以创建 稀疏数组 sparseArr   int[sum + 1] [3]
+ *  2. 根据sum 就可以创建 稀疏数组 sparseArr   int[sum + 1] [3] 3是固定 用来描述数据的 行号 列号 值
  *  3. 将二维数组的有效数据数据存入到 稀疏数组
  *          row   col   val
  *      0   11     11    2 --第一行用来保存原始的二维数组总共有几行 几列 几个非0的值
@@ -37,7 +37,7 @@ package com.bighao.sparsearray;
  */
 public class SparseArray {
     public static void main(String[] args) {
-        // 创建一个原始的二维数组 11*11
+        // 模拟棋盘 创建一个原始的二维数组 11*11
         // 0-表示没有棋子 1-黑子 2-蓝子
         int[][] chessArr1 = new int[11][11];
         chessArr1[1][2] = 1;
@@ -87,8 +87,7 @@ public class SparseArray {
         }
 
         // 输出稀疏数组的形式
-        System.out.println();
-        System.out.println("得到的稀疏数组为========>");
+        System.out.println("\n得到的稀疏数组为========>");
         for (int i = 0; i < sparseArr.length; i++) {
             System.out.printf("%d\t%d\t%d\t\n", sparseArr[i][0], sparseArr[i][1],  sparseArr[i][2]);
         }
@@ -114,8 +113,7 @@ public class SparseArray {
         }
 
         // 输出恢复后的二维数组
-        System.out.println();
-        System.out.println("恢复后的二维数组");
+        System.out.println("\n恢复后的二维数组");
         for(int[] row : chessArr2) {
             for(int data : row) {
                 System.out.printf("%d\t", data);

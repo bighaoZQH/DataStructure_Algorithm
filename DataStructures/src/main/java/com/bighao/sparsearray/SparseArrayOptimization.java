@@ -1,7 +1,5 @@
 package com.bighao.sparsearray;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,7 @@ import java.util.List;
  */
 public class SparseArrayOptimization {
     public static void main(String[] args) {
-        // 创建一个原始的二维数组 11*11
+        // 模拟棋盘 创建一个原始的二维数组 11*11
         // 0-表示没有棋子 1-黑子 2-蓝子
         int[][] chessArr1 = new int[11][11];
         chessArr1[1][2] = 1;
@@ -29,16 +27,13 @@ public class SparseArrayOptimization {
         // 将稀疏数组保存到磁盘
         saveSparseArrToFile(sparseArr);
 
-        /** 将稀疏数组 恢复成 原始的二维数组 */
-        // 1.先读取稀疏数组的第一行，根据第一行的数据，创建原始的二维数组
         // 读取文件里的内容转为稀疏数组
         int[][] sparseArr2 = readFileToSparseArr();
         // 将稀疏数组恢复为原来的二维数组
         int[][] chessArr2 = recoverArray(sparseArr2);
 
         // 输出恢复后的二维数组
-        System.out.println();
-        System.out.println("恢复后的二维数组");
+        System.out.println("\n恢复后的二维数组");
         for(int[] row : chessArr2) {
             for(int data : row) {
                 System.out.printf("%d\t", data);
@@ -48,7 +43,10 @@ public class SparseArrayOptimization {
 
     }
 
+
+    /** 将稀疏数组恢复为原来的二维数组 */
     private static int[][] recoverArray(int[][] sparseArr2) {
+        // 1.先读取稀疏数组的第一行，根据第一行的数据，创建原始的二维数组
         int rowCount = sparseArr2[0][0]; //原始数组的行数
         int colCount = sparseArr2[0][1]; //原始数组的列数
         int chessArr2[][] = new int[rowCount][colCount];
@@ -107,8 +105,7 @@ public class SparseArrayOptimization {
         }
 
         // 输出稀疏数组的形式
-        System.out.println();
-        System.out.println("得到的稀疏数组为========>");
+        System.out.println("\n得到的稀疏数组为========>");
         for (int i = 0; i < sparseArr.length; i++) {
             System.out.printf("%d\t%d\t%d\t\n", sparseArr[i][0], sparseArr[i][1],  sparseArr[i][2]);
         }
@@ -117,17 +114,6 @@ public class SparseArrayOptimization {
         return sparseArr;
     }
 
-    /** 测试读取文件转为稀疏数组 */
-    @Test
-    public void test() {
-        int[][] sparseArr = readFileToSparseArr();
-        for(int[] row : sparseArr) {
-            for(int data : row) {
-                System.out.printf("%d\t", data);
-            }
-            System.out.println();
-        }
-    }
 
     /** 将文件中的数据转为稀疏数组 */
     public static int[][] readFileToSparseArr() {
@@ -136,7 +122,7 @@ public class SparseArrayOptimization {
         try {
             // 获取文件保存路径
             String currentJavaFilePath = getCurrentJavaFilePath();
-            File file = new File("D:\\java workspace\\interview_learn_work\\韩顺平老师课程代码\\Algorithm_DataStructure\\map.txt");
+            File file = new File(currentJavaFilePath + "map.txt");
 
             buf = new BufferedReader(new FileReader(file));
             String tempStr = null;
@@ -196,11 +182,13 @@ public class SparseArrayOptimization {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
-                out.flush();
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(out != null) {
+                try {
+                    out.flush();
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
