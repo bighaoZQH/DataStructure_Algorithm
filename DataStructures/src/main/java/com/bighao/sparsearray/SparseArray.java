@@ -69,16 +69,18 @@ public class SparseArray {
         // 稀疏数组第一行需要来描述原来的二维数组，因此需要+1 3是稀疏数组固定用来描述原来数据的列数
         int sparseArr[][] = new int[sum + 1][3];
         // 给稀疏数组赋值
-        sparseArr[0][0] = 11;
-        sparseArr[0][1] = 11;
+        sparseArr[0][0] = chessArr1.length;
+        sparseArr[0][1] = chessArr1[0].length;
         sparseArr[0][2] = sum;
 
-        // 遍历二维数组，将非0的值存放到sparseArr中
-        int count = 0; // count 用于记录是第几个非0数据
+        // 3.遍历二维数组，将非0的值存放到sparseArr中
+        // count 用于记录是第几个非0数据
+        int count = 0;
         for (int i = 0; i < chessArr1.length; i++) {
             for (int j = 0; j < chessArr1[i].length; j++) {
                 if (chessArr1[i][j] != 0) {
-                    count++; // 第一行用来存元数据
+                    // 第一行用来存元数据
+                    count++;
                     sparseArr[count][0] = i;
                     sparseArr[count][1] = j;
                     sparseArr[count][2] = chessArr1[i][j];
@@ -107,8 +109,11 @@ public class SparseArray {
 
         // 2.在读取稀疏数组后几行(从第二行开始)的数据，并赋给 原始的二维数组 即可
         for (int i = 1; i < sparseArr.length; i++) {
-            int rowNum = sparseArr[i][0]; //原来数据的行号
-            int colNum = sparseArr[i][1]; //原来数据的列号
+            // 原来数据的行号
+            int rowNum = sparseArr[i][0];
+            // 原来数据的列号
+            int colNum = sparseArr[i][1];
+            // 数据的值
             chessArr2[rowNum][colNum] = sparseArr[i][2];
         }
 

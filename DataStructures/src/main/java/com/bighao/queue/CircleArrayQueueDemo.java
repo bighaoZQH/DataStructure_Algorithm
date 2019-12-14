@@ -112,7 +112,7 @@ class CircleArray {
     /**
      * 队列尾
      * rear 变量的含义做一个调整：rear 指向队列的最后一个元素的后一个位置. 因为希望空出一个空间做为约定.
-     * arr 的初始值 = 0
+     * rear 的初始值 = 0
      */
     private int rear;
     // 该数组用于存放数据，模拟队列
@@ -144,7 +144,10 @@ class CircleArray {
         // 直接将数据加入
         arr[rear] = n;
         // 将rear后移，这里必须考虑取模，假如已经到最后一个结果就为0，形成环形
-        rear = (rear + 1) % maxSize;
+        /*if(++rear == maxSize) {
+            rear = 0;
+        }*/
+        rear = ++rear % maxSize;
     }
 
     /** 获取队列的数据，出队列 */
@@ -157,7 +160,10 @@ class CircleArray {
         // 2.将front后移,防止数据越界，考虑取模。满就回到原点
         // 3.将临时保存的变量返回
         int value = arr[front];
-        front = (front + 1) % maxSize;
+        /*if(++front == maxSize) {
+            front = 0;
+        }*/
+        front = ++front % maxSize;
         return value;
     }
 
@@ -167,7 +173,7 @@ class CircleArray {
             System.out.println("队列为空，没有数据..");
             return;
         }
-        // 思路：从front开始遍历，遍历多少个元素
+        // 思路：从front开始遍历，遍历多少个元素? 从front开始向后遍历size()个数据
         // 动脑筋
         for (int i = front; i < front + size(); i++) {
             // 由于是环形的 所以front可能会比rear大，因此这里的下标是i % maxSize 这样下标才能回到原点形成环形
