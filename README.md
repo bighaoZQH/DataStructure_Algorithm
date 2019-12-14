@@ -6,4 +6,5 @@ Data Structure And Algorithm 数据结构和算法(Java语言描述)
 
 目前已经学习的
 数据结构:
-  1.稀疏数组
+  1.稀疏数组(在sparsearray包下)
+  2.数组实现单向队列和环形队列(在queue包下)
