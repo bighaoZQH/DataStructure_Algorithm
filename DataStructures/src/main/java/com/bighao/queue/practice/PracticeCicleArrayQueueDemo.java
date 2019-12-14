@@ -99,7 +99,7 @@ class CircleArrayPractice {
         /*if(++rear == maxSize) {
             rear = 0;
         }*/
-        rear = ++rear % maxSize;
+        rear = (rear + 1) % maxSize;
     }
 
     /** 获取队列的数据，出队列 */
@@ -111,7 +111,7 @@ class CircleArrayPractice {
         /*if(++front == maxSize) {
             front = 0;
         }*/
-        front = ++front % maxSize;
+        front = (front + 1) % maxSize;
         return value;
     }
 
