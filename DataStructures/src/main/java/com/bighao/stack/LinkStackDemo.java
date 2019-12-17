@@ -102,7 +102,7 @@ class LinkStack {
 
     // 获取当前栈元素个数
     public int size() {
-        return top == -1 ? 0 : top;
+        return top == -1 ? 0 : top + 1;
     }
 
     // 入栈-push

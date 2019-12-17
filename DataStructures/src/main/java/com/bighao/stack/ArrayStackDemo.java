@@ -137,7 +137,7 @@ class ArrayStack {
 
     // 获取当前栈有多少个元素
     public int size() {
-        return top == -1 ? 0 : top;
+        return top == -1 ? 0 : top + 1;
     }
 
     // 显示栈的情况 - 遍历栈, 遍历时，需要从栈顶开始显示数据
