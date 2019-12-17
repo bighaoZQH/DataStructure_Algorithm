@@ -54,7 +54,7 @@ public class DoubleLinkedListDemo {
         doubleLinkedList.list();
 
         // 删除
-        doubleLinkedList.del(2);
+        doubleLinkedList.remove(2);
         System.out.println("\n删除后的链表情况======>");
         doubleLinkedList.list();
 
@@ -194,7 +194,7 @@ class DoubleLinkedList {
      * 对于双向链表，我们可以【直接找到】要删除的节点，进行自我删除即可
      * 而单项链表是找到待删除节点的【前一个】节点
      */
-    public void del(int no) {
+    public void remove(int no) {
         // 判断当前链表是否为空
         if (head.next == null) {
             System.out.println("链表为空");
