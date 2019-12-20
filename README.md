@@ -66,5 +66,6 @@
 
 ```
 1).递归的规则与迷宫回溯案例(RecursionTest.java, MiGong.java)
+2).八皇后问题(回溯算法来解决 Queen8.java)
 ```
 
