@@ -69,3 +69,12 @@
 2).八皇后问题(回溯算法来解决 Queen8.java)
 ```
 
+## 5.八大排序算法
+
+```
+1).冒泡排序(BubbleSort.java)
+2).选择排序(SelectSort.java)
+3).插入排序(InsertSort.java)
+4).希尔排序(交换式和移位式 ShellSort.java)
+```
+
