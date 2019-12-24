@@ -69,7 +69,7 @@
 2).八皇后问题(回溯算法来解决 Queen8.java)
 ```
 
-## 5.八大排序算法
+## 5.八大排序算法(sort包下)
 
 ```
 1).冒泡排序(BubbleSort.java)
@@ -78,5 +78,22 @@
 4).希尔排序(交换式和移位式 ShellSort.java)
 5).快速排序(QuickSort.java)
 6).归并排序(MergetSort.java)
+7).基数排序(RadixSort.java)
+剩下还有个堆排序,等到学完二叉树的时候才能更新
+```
+
+## 6.查找算法(search包下)
+
+```
+1).二分查找(BinarySearch.java)
+2).插值查找(InsertValueSearch.java)
+3).斐波那契查找算法(FibonacciSearch.java)
+```
+
+## 7.哈希表(hashtab包下)
+
+```
+1).基于数组和链表实现简答的哈希表
+2).哈希表的增删改查
 ```
 
