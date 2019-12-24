@@ -1,9 +1,6 @@
 package com.bighao.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @Author: bighao周启豪
@@ -12,8 +9,7 @@ import lombok.ToString;
  *
  * 此类用户测试添加元素使用
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @ToString
 public class UserEntity {

@@ -76,5 +76,7 @@
 2).选择排序(SelectSort.java)
 3).插入排序(InsertSort.java)
 4).希尔排序(交换式和移位式 ShellSort.java)
+5).快速排序(QuickSort.java)
+6).归并排序(MergetSort.java)
 ```
 
