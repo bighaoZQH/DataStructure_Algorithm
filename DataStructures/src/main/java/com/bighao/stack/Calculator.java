@@ -123,6 +123,9 @@ public class Calculator {
 }
 
 
+
+
+
 /** 先创建一个栈，直接使用前面基于数组的栈 但需要扩展功能 */
 class ArrayStack2 {
     // 栈的最大大小

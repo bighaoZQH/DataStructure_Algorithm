@@ -73,6 +73,10 @@ public class LinkStackDemo {
 
 }
 
+
+
+
+
 /** 单向链表实现栈 */
 class LinkStack<E> {
     // 栈的最大大小

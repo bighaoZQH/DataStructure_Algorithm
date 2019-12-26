@@ -74,6 +74,13 @@ public class ArrayQueueDemo {
 
 }
 
+
+
+
+
+
+
+
 /** 使用数组模拟队列-编写一个ArrayQueue类 */
 class ArrayQueue {
     // 表示数组的最大容量
@@ -153,7 +160,5 @@ class ArrayQueue {
         }
         return arr[front + 1];
     }
-
-
 
 }

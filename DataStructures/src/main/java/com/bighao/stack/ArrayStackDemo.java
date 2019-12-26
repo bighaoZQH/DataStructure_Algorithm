@@ -79,6 +79,10 @@ public class ArrayStackDemo {
 }
 
 
+
+
+
+
 /** 定义一个ArrayStack 表示栈结构 */
 class ArrayStack {
     // 栈的最大大小

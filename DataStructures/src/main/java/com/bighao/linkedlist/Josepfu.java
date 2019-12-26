@@ -61,6 +61,12 @@ public class Josepfu {
     }
 }
 
+
+
+
+
+
+
 /** 创建一个单向环形链表 */
 class CircleSingleLinkedList {
     // 创建一个first节点，当前没有编号
@@ -166,6 +172,12 @@ class CircleSingleLinkedList {
         System.out.printf("最后留在圈中的节点编号%d \n", first.getNo());
     }
 }
+
+
+
+
+
+
 
 
 /** 先创建一个Node类，表示一个节点 */

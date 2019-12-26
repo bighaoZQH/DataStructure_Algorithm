@@ -61,6 +61,11 @@ public class DoubleLinkedListDemo {
     }
 }
 
+
+
+
+
+
 /** 创建一个双向链表的类 */
 class DoubleLinkedList {
     // 先初始化一个头节点,头节点不要动,不存放具体数据
@@ -249,6 +254,11 @@ class DoubleLinkedList {
     }
 
 }
+
+
+
+
+
 
 
 /** 定义HereNode，每个HeroNode对象就是一个节点 */

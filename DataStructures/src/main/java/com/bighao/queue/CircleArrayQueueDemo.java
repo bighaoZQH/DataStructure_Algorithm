@@ -99,6 +99,15 @@ public class CircleArrayQueueDemo {
     }
 }
 
+
+
+
+
+
+
+
+
+
 /** 数组实现环形队列 */
 class CircleArray {
     // 表示数组的最大容量

@@ -336,6 +336,12 @@ public class SingleLinkedListDemo {
 
 }
 
+
+
+
+
+
+
 /** 自定义单链表SingleLinkedList 来管理HereNode */
 class SingleLinkedList {
     // 先初始化一个头节点,头节点不要动,不存放具体数据
@@ -510,6 +516,12 @@ class SingleLinkedList {
     }
 
 }
+
+
+
+
+
+
 
 /** 定义HereNode，每个HeroNode对象就是一个节点 */
 class HeroNode {
