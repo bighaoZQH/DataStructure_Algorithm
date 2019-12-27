@@ -11,7 +11,32 @@ import lombok.Data;
  * 前序，中序，后序
  * https://www.cnblogs.com/lishanlei/p/10707830.html
  * https://blog.csdn.net/jisuanjiguoba/article/details/81092812
- * https://blog.51cto.com/yushiwh/2439518
+ * https://blog.51cto.com/yushiwh/2439518 这个文档写的后序遍历线索化二叉树的代码 我测试后发现有问题，我写的测试后没问题
+ *
+ *
+ * 遍历线索化二叉树
+ *  前序:
+ *      1.先打印当前节点
+ *      2.遍历左子节点,打印
+ *      3.如果没有左子节点，会有线索,就根据线索遍历打印
+ *
+ *  中序:
+ *      1.先找到左子树的起始节点，然后打印起始节点
+ *      2.根据后继线索依次打印
+ *      3.如果没有后继线索，则说当前节点是中间节点(即父节点),就将当前节点指向其右子树
+ *      5.重复上面操作
+ *
+ *  后序:
+ *      备注:后序遍历线索化二叉树的话需要一个parnet变量来指向父节点,中序和前序不需要
+ *      1.先从root节点的左子树开始,找到左子树的起始节点
+ *      2.打印左子树的起始节点，然后根据这个节点的后继线索开始遍历打印
+ *      3.如果当前节点没有后继线索了，就将当前节点指向其父节点
+ *          说明:此时当前节点的父节点是一个有完整左右子树的节点
+ *              为什么? 因为这是后序线索化后的二叉树，一个节点如果没有完整的左右子树,也是会被连在线索中的
+ *      4.找到当前节点的右子树的起始节点，然后根据这个节点的后继线索开始遍历打印
+ *      5.重复3步骤
+ *      6.如果3步骤的当前节点的父节点是root就打印root节点并退出
+ *
  */
 public class ThreadedBinaryTreeDemo {
     public static void main(String[] args) {
@@ -22,28 +47,52 @@ public class ThreadedBinaryTreeDemo {
         TreeNode node3 = new TreeNode(8, "秦岚");
         TreeNode node4 = new TreeNode(10, "李宣美");
         TreeNode node5 = new TreeNode(14, "桥本有菜");
+        TreeNode node6 = new TreeNode(15, "桥本有菜2");
+        TreeNode node7 = new TreeNode(16, "桥本有菜3");
+        TreeNode node8 = new TreeNode(17, "桥本有菜4");
+        TreeNode node9 = new TreeNode(18, "桥本有菜5");
+
+
         // 手动创建二叉树,目前先简单处理二叉树，后面再递归创建
         root.setLeft(node1);
         root.setRight(node2);
         node1.setLeft(node3);
         node1.setRight(node4);
         node2.setLeft(node5);
+        /*node4.setLeft(node7);
+        node5.setLeft(node6);
+        node3.setLeft(node8);
+        node3.setRight(node9);*/
 
-        // 测试中序线索化二叉树
+
+        // 测试线索化二叉树
         ThreadedBinaryTree threadedBinaryTree = new ThreadedBinaryTree();
         threadedBinaryTree.setRoot(root);
         //threadedBinaryTree.preThreadedNodes();
-        //threadedBinaryTree.infixThreadedNodes();
-        threadedBinaryTree.postThreadedNodes();
+        threadedBinaryTree.infixThreadedNodes();
+        //threadedBinaryTree.postThreadedNodes();
+
         // 查看结果
-        TreeNode leftNode = node4.getLeft();
+        /*TreeNode leftNode = node4.getLeft();
         TreeNode rightNode = node4.getRight();
-        System.out.println("leftNode==> " + leftNode + " rightNode===> " + rightNode);
+        System.out.println("leftNode==> " + leftNode + " rightNode===> " + rightNode);*/
 
         System.out.println("使用线索化二叉树的方式遍历====>");
         //threadedBinaryTree.preThreadedList();
-        //threadedBinaryTree.infixThreadedList();
-        threadedBinaryTree.postThreadedList();
+        threadedBinaryTree.infixThreadedList();
+
+        //如果是后序，需要创建二叉树的时候，将parent进行保存。这个是用于后序二叉树的遍历的
+        node1.setParent(root);
+        node2.setParent(root);
+        node3.setParent(node1);
+        node4.setParent(node1);
+        node5.setParent(node2);
+        node6.setParent(node5);
+        node7.setParent(node4);
+        node8.setParent(node3);
+        node9.setParent(node3);
+
+        //threadedBinaryTree.postThreadedList();
 
 
     }
@@ -75,6 +124,9 @@ class ThreadedBinaryTree {
     public void postThreadedNodes() {
         this.postThreadedNodes(root);
     }
+
+
+    /** ===========================遍历线索化二叉树start================================== */
 
     /** 遍历前序线索化二叉树 */
     public void preThreadedList() {
@@ -119,32 +171,41 @@ class ThreadedBinaryTree {
     public void postThreadedList() {
         TreeNode node = root;
         while (node != null && node.getLeftType() == 0) {
-            // 找到起始节点
+            // 先遍历左子树,找到左子树起始节点
             node = node.getLeft();
         }
+
         while (node != null) {
+            // 如果有后序线索
             if (node.getRightType() == 1) {
                 System.out.println(node);
-                pre = node;
                 node = node.getRight();
             } else {
-                if (node.getRight() == pre) {
-                    System.out.print(node + ", ");
-                    if (node == root) {
-                        return;
-                    }
-                    pre = node;
-                    //node = node.getParent();
-                } else {    //如果从左节点的进入则找到有子树的最左节点
-                    node = node.getRight();
-                    while ( node != null && node.getLeftType() == 0 ) {
-                        node = node.getLeft();
-                    }
+                System.out.println(node);
+                if (node == root) {
+                    return;
                 }
-            }
+                // 让node指向其父节点，开始往父节点的右子树遍历，此时node指向一个有完整左右子树的父节点(不一定是root节点)
+                node = node.getParent();
+                if (node.getRight() == null) {
+                    // 如果进这个if,说明此时节点为root，如果root的右子树为空,就输出root,结束遍历
+                    // 为什么? 因为这是后序线索化后的二叉树，非root节点如果没有完整的左右子树,
+                    // 也是会被连在线索中的，因此除了root都不会进入到这个if里来
+                    System.out.println(node);
+                    //return; //这个return可写可不写，不写的话最外层的while循环判断也会退出
+                }
+                node = node.getRight();
+                // 找到右子树的起始节点
+                while (node != null && node.getLeftType() == 0) {
+                    node = node.getLeft();
+                }
+            } // end of else
         }
-        System.out.println(pre);
     }
+
+    /** ###########################遍历线索化二叉树end################################ */
+
+    /** ===========================线索化二叉树start================================== */
 
     /** 对二叉树进行前序线索化 */
     public void preThreadedNodes(TreeNode node) {
@@ -219,65 +280,8 @@ class ThreadedBinaryTree {
         pre = node;
     }
 
+    /** ###########################线索化二叉树end################################ */
 
-    /** 删除节点 */
-    public boolean delNode(int no) {
-        if (root != null) {
-            // 判断root是不是要删除的节点
-            if (root.getNo() == no) {
-                root = null;
-                return true;
-            } else {
-                return root.delNode(no);
-            }
-        } else {
-            System.out.println("这是个空树");
-            return false;
-        }
-    }
-
-
-    /** 前序遍历 */
-    public void preOrder() {
-        if (this.root != null) {
-            this.root.preOrder();
-        } else {
-            System.out.println("二叉树为空，无法遍历");
-        }
-    }
-
-    /** 中序遍历 */
-    public void infixOrder() {
-        if (this.root != null) {
-            this.root.infixOrder();
-        } else {
-            System.out.println("二叉树为空，无法遍历");
-        }
-    }
-
-    /** 后序遍历 */
-    public void postOrder() {
-        if (this.root != null) {
-            this.root.postOrder();
-        } else {
-            System.out.println("二叉树为空，无法遍历");
-        }
-    }
-
-    /** 前序遍历查找 */
-    public TreeNode preOrderSearch(int no) {
-        return root == null ? null : root.preOrderSearch(no);
-    }
-
-    /** 中序遍历查找 */
-    public TreeNode infixOrderSearch(int no) {
-        return root == null ? null : root.infixOrderSearch(no);
-    }
-
-    /** 后序遍历查找 */
-    public TreeNode postOrderSearch(int no) {
-        return root == null ? null : root.postOrderSearch(no);
-    }
 
 }
 
@@ -295,6 +299,9 @@ class TreeNode {
     private TreeNode left;
     /** 右子节点，默认为空 */
     private TreeNode right;
+    /** 父节点(后序线索化遍历需要) */
+    private TreeNode parent;
+
 
     /** 左指针域类型 0：指向子节点、1：前驱或后继线索 */
     private int leftType;
@@ -312,153 +319,6 @@ class TreeNode {
                 "no=" + no +
                 ", name='" + name + '\'' +
                 '}';
-    }
-
-    /**
-     * 递归删除节点
-     * 如果是叶子节点,就删除该节点,如果是非叶子节点,就删除该子树
-     */
-    public boolean delNode(int no) {
-        // 如果当前节点的左子节点不为空，并且左子节点就是要删除的节点，就将this.left=null;并且就返回(结束递归删除)
-        if (this.left != null && this.left.no == no) {
-            this.left = null;
-            return true;
-        }
-        // 如果当前节点的右子节点不为空，并且右子节点就是要删除的节点，就将this.right=null;并且就返回(结束递归删除)
-        if (this.right != null && this.right.no == no) {
-            this.right = null;
-            return true;
-        }
-        // 向左递归
-        if (this.left != null) {
-            this.left.delNode(no);
-        }
-        //  向右递归
-        if (this.right != null) {
-            this.right.delNode(no);
-        }
-        return false;
-    }
-
-    /** 前序遍历 */
-    public void preOrder() {
-        // 先输出父节点
-        System.out.println(this);
-        // 递归向左子树前序遍历
-        if (this.left != null) {
-            this.left.preOrder();
-        }
-        // 递归向右子树前序遍历
-        if (this.right != null) {
-            this.right.preOrder();
-        }
-    }
-
-    /** 中序遍历 */
-    public void infixOrder() {
-        // 递归向左子树中序遍历
-        if (this.left != null) {
-            this.left.infixOrder();
-        }
-        // 输出父节点(当前节点)
-        System.out.println(this);
-        // 递归向右子树中序遍历
-        if (this.right != null) {
-            this.right.infixOrder();
-        }
-    }
-
-    /** 后序遍历 */
-    public void postOrder() {
-        if (this.left != null) {
-            this.left.postOrder();
-        }
-        if (this.right != null) {
-            this.right.postOrder();
-        }
-        System.out.println(this);
-    }
-
-    /**
-     * 前序遍历查找
-     * @param no 编号
-     * @return 找到返回该节点，没找到返回null
-     */
-    public TreeNode preOrderSearch(int no) {
-        //System.out.println("前序遍历查找");
-        // 比较当前节点是不是
-        if (this.no == no) {
-            return this;
-        }
-        // 如果不等则判断当前节点的左子节点是否为空，如果不为空，则递归前序查找
-        TreeNode resNode = null;
-        if (this.left != null) {
-            resNode = this.left.preOrderSearch(no);
-        }
-        if (resNode != null) {
-            // 左子树找到就返回
-            return resNode;
-        }
-        // 左递归没找到，就右递归
-        if (this.right != null) {
-            resNode = this.right.preOrderSearch(no);
-        }
-        return resNode;
-    }
-
-
-    /** 中序遍历查找 */
-    public TreeNode infixOrderSearch(int no) {
-        TreeNode resNode = null;
-        // 判断当前节点的左子节点是否为空，如果不为空，则递归中序查找
-        if (this.left != null) {
-            resNode = this.left.infixOrderSearch(no);
-        }
-        if (resNode != null) {
-            return resNode;
-        }
-
-        //System.out.println("中序遍历查找");
-        // 如果没有找到就和当前节点比较，如果是就返回当前节点
-        if (this.no == no) {
-            return this;
-        }
-
-        // 否则右递归中序查找
-        if (this.right != null) {
-            resNode = this.right.infixOrderSearch(no);
-        }
-        return resNode;
-    }
-
-
-    /** 后序遍历查找 */
-    public TreeNode postOrderSearch(int no) {
-        TreeNode resNode = null;
-        // 判断当前节点的左子节点是否为空，如果不为空，则递归后序查找
-        if (this.left != null) {
-            resNode = this.left.postOrderSearch(no);
-        }
-        // 左子树找到就返回
-        if (resNode != null) {
-            return resNode;
-        }
-
-        // 如果左子树没找到，就向右子树递归
-        if (this.right != null) {
-            resNode = this.right.postOrderSearch(no);
-        }
-        if (resNode != null) {
-            return resNode;
-        }
-
-        //System.out.println("后序遍历查找");
-        // 如果左右都没找到,就比较当前节点
-        if (this.no == no) {
-            return this;
-        }
-
-        return resNode;
     }
 }
 
