@@ -98,11 +98,18 @@
 2).哈希表的增删改查
 ```
 
-##  8.二叉树(tree包下)
+##  8.简单二叉树(tree包下)
 
 ```
 1).简单的二叉树的前序,中序,后序遍历,遍历查找，删除(非二叉排序树 BinaryTreeDemo.java)
 2).顺序存储二叉树(数组方式存储二叉树)，并遍历(ArrBinaryTreeDemo.java)
 3).前序,中序,后序线索化二叉树，遍历前中后序线索化二叉树(ThreadedBinaryTreeDemo.java)
+```
+
+## 9.赫夫曼树与赫夫曼编码
+
+```
+1).赫夫曼树(huffmantree包下HuffmanTree.java)
+2).赫夫曼编码与文件的压缩和解压缩(huffmancode包下HuffmanCode.java)
 ```
 
