@@ -81,11 +81,9 @@ public class HuffmanTree {
 
     /** 前序遍历 */
     public static void preOrder(Node root) {
-        if (root != null) {
-            root.preOrder();
-        } else {
-            System.out.println("空树，无法遍历");
-        }
+        if (root == null)
+            throw new RuntimeException("tree is empry");
+        root.preOrder();
     }
 
 }
