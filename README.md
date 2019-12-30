@@ -116,6 +116,12 @@
 ## 10.二叉排序树(binarysorttree包下)
 
 ```
-1).二叉排序树(BTS)的添加查找删除(BinarySortTreeDemo.java)
+1).二叉排序树(BST)的添加查找删除(BinarySortTreeDemo.java)
+```
+
+## 11.AVL树(avl包下)
+
+```
+1).平衡二叉树(AVL)的添加，左旋，右旋，双旋(AvlTreeDemo.java)
 ```
 
