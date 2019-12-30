@@ -7,11 +7,23 @@ package com.bighao.avl;
  * @Version 1.0
  *
  * 二叉平衡树
+ *
+ * 某结点的左子树与右子树的高度(深度)差即为该结点的平衡因子（BF,Balance Factor）。
+ * 平衡二叉树上所有结点的平衡因子只可能是 -1，0 或 1。
+ *
+ * BST 存在的问题分析:
+ * 左子树全部为空，从形式上看，更像一个单链表.
+ * 插入速度没有影响
+ * 查询速度明显降低(因为需要依次比较), 不能发挥BST的优势，因为每次还需要比较左子树，其查询速度比单链表还慢
+ * 解决方案-平衡二叉树(AVL)
+ *
+ *
  */
 public class AvlTreeDemo {
     public static void main(String[] args) {
-        //int[] arr = {4, 3, 6, 5, 7, 8};
-        int[] arr = {10, 12, 8, 9, 7, 6};
+        //int[] arr = {4, 3, 6, 5, 7, 8}; //测试左旋转
+        //int[] arr = {10, 12, 8, 9, 7, 6}; //测试右旋转
+        int[] arr = {10, 11, 7, 6, 8, 9}; //测试双旋转
         // 创建一个AVL tree
         AvlTree avlTree = new AvlTree();
         // 添加节点(并处理平衡)
@@ -26,7 +38,11 @@ public class AvlTreeDemo {
         System.out.println("树的高度是==> " + avlTree.root.height()); //4 => 3
         System.out.println("树的左子树高度是==> " + avlTree.root.leftHeight()); //1 => 2
         System.out.println("树的右子树高度是==> " + avlTree.root.rightHeight()); //3 => 2
-        System.out.println("旋转后的根节点是===>" + avlTree.root);
+        System.out.println("旋转后的根节点是===>" + avlTree.root); //8
+        // 验证是否正确
+        System.out.println("双旋转后的根节点的左子节点===>" + avlTree.root.left);//7
+        System.out.println("双旋转后的根节点的左子节点===>" + avlTree.root.left.left);//7
+
 
     }
 }
@@ -275,10 +291,24 @@ class Node {
 
         // 当添加完一个节点后，如果：(右子树的高度 - 左子树的高度) > 1，就要左旋转
         if (rightHeight() - leftHeight() > 1) {
+            // 如果 当前节点的右子树的左子树高度 大于 它的右子树的右子树的高度
+            if (right != null && right.leftHeight() > right.rightHeight()) {
+                // 先对当前节点的右子树 进行 右旋转
+                right.rightRotate();
+            }
+            // 再进行左旋转
             leftRotate();
+            // 此时可以return，因为此时已经平衡
+            return;
         }
         // 当添加完一个节点后，如果：(左子树的高度 - 右子树的高度) > 1，就要右旋转
         if (leftHeight() - rightHeight() > 1) {
+            // 如果 当前节点的左子树的右子树高度 大于 它的左子树的左子树的高度
+            if (left != null && left.rightHeight() > left.leftHeight()) {
+                // 先对当前节点的左节点(左子树)进行左旋转
+                left.leftRotate();
+            }
+            // 再进行右旋转
             rightRotate();
         }
     }

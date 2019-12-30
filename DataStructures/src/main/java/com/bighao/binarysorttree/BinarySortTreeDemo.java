@@ -7,7 +7,7 @@ import lombok.Getter;
  * @Date: 2019/12/29 19:50
  * @Version 1.0
  *
- * 二叉排序树(BTS) 或叫二叉搜索树 execl 1308
+ * 二叉排序树(BST) 或叫二叉搜索树 execl 1308
  * 添加查找删除
  *
  * 二叉排序树：BST: (Binary Sort(Search) Tree), 对于二叉排序树的任何一个非叶子节点，
