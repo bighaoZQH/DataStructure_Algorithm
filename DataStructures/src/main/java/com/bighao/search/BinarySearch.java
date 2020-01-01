@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @Date: 2019/12/23 13:28
  * @Version 1.0
  *
- * 二分查找
+ * 递归实现二分查找
  * 使用二分查找的前提是该数组是有序的
  */
 public class BinarySearch {
@@ -22,7 +22,7 @@ public class BinarySearch {
     }
 
     /**
-     * 二分查找，找到多个重复的值
+     * 递归实现二分查找，找到多个重复的值
      * 思路分析:
      *  1.在找到mid值时，不要马上返回
      *  2.向mid 索引值的 左边 扫描，将所有满足查找值的元素的下标，加入到集合中ArrayList
@@ -73,7 +73,7 @@ public class BinarySearch {
 
 
     /**
-     * 二分查找 但无法找到多个重复的
+     * 递归实现二分查找 但无法找到多个重复的
      * @param arr
      * @param left 左边的索引
      * @param right 右边的索引
