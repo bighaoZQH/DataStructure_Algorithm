@@ -8,7 +8,10 @@ import java.util.Arrays;
  * @Version 1.0
  *
  * KMP算法
- * 这个我是看了知乎(如何更好的理解和掌握KMP算法)才理解的
+ * https://www.bilibili.com/video/av11866460?from=search&seid=17663103278152628062
+ * https://www.bilibili.com/video/av16828557/?spm_id_from=333.788.videocard.0
+ * 灯哥讲的比较好
+ * 但KMP算法我是看了知乎(如何更好的理解和掌握KMP算法这个问题下的回答)才理解的
  */
 public class KMPAlgorithm {
     public static void main(String[] args) {

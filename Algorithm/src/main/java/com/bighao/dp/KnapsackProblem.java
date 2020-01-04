@@ -6,6 +6,8 @@ package com.bighao.dp;
  * @Version 1.0
  *
  * 动态规划-背包问题
+ *
+ * https://www.bilibili.com/video/av16544031?from=search&seid=5431452677041726590 灯哥讲的比较好
  */
 public class KnapsackProblem {
     public static void main(String[] args) {
