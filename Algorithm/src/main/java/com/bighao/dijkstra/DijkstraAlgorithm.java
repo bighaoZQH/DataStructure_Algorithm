@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @Date: 2020/1/4 18:21
  * @Version 1.0
  *
- * 地杰斯特拉算法 - 最短路径问题
+ * 迪杰斯特拉算法 - 最短路径问题
  */
 public class DijkstraAlgorithm {
     public static void main(String[] args) {
